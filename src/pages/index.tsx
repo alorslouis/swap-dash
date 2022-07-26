@@ -21,7 +21,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="container mx-auto flex flex-col items-center justify-center h-screen p-4">
-        <span className="hover:rotate-180 transition ease-linear">
+        <span className="hover:rotate-180 transition ease-linear duration-300">
           <Image
             src="/image05.png"
             alt="swapshop logo"
@@ -32,6 +32,7 @@ const Home: NextPage = () => {
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
           ShopSwap
         </h1>
+        <div>are you logged in?</div>
         <p className="text-2xl text-gray-700">This stack uses:</p>
         <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
           <TechnologyCard
@@ -69,7 +70,7 @@ const TechnologyCard = ({
   documentation,
 }: TechnologyCardProps) => {
   return (
-    <section className="flex flex-col justify-center p-6 duration-500 border-2 border-gray-500 rounded shadow-xl motion-safe:hover:scale-105">
+    <section className="flex flex-col justify-center p-6 duration-200 border-2 border-gray-500 rounded shadow-xl motion-safe:hover:scale-105">
       <h2 className="text-lg text-gray-700">{name}</h2>
       <p className="text-sm text-gray-600">{description}</p>
       <a
