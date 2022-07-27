@@ -1,9 +1,13 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { z } from "Zod";
 
 type Inputs = {
   example: string;
   yalla: string;
+  gender: string;
+  age: Array<string>;
+  income: Array<string>;
   exampleRequired: string;
 };
 
@@ -33,6 +37,82 @@ export default function App() {
           className="form-input mx-4 px-4 py-3 rounded-lg"
         />
       </label>
+
+      <label className="px-4">
+        Does your brand predominantly target:
+        <select
+          defaultValue=""
+          {...register("gender")}
+          className="form-select mx-4 px-4 py-3 rounded-lg"
+        >
+          <option>Men</option>
+          <option>Women</option>
+          <option>Both</option>
+        </select>
+      </label>
+
+      <label className="px-4">
+        What age ranges does your brand target?
+        <select
+          defaultValue="test"
+          multiple={true}
+          {...register("age")}
+          className="form-multiselect mx-4 px-4 py-3 rounded-lg"
+        >
+          <option>0 - 6</option>
+          <option>7 - 13</option>
+          <option>14 - 18</option>
+          <option>19 - 24</option>
+          <option>25 - 34</option>
+          <option>45 - 65</option>
+          <option>65+</option>
+        </select>
+      </label>
+
+      <label className="px-4">
+        What income ranges does your brand target?
+        <select
+          defaultValue="test"
+          multiple={true}
+          {...register("income")}
+          className="form-multiselect mx-4 px-4 py-3 rounded-lg"
+        >
+          <option>0 - 6</option>
+          <option>7 - 13</option>
+          <option>14 - 18</option>
+          <option>19 - 24</option>
+          <option>25 - 34</option>
+          <option>45 - 65</option>
+          <option>65+</option>
+        </select>
+      </label>
+
+      <label className="px-4">
+        What income ranges does your brand target?
+        <select
+          defaultValue="test"
+          multiple={true}
+          {...register("income")}
+          className="form-multiselect mx-4 px-4 py-3 rounded-lg"
+        >
+          <option>0 - 6</option>
+          <option>7 - 13</option>
+          <option>14 - 18</option>
+          <option>19 - 24</option>
+          <option>25 - 34</option>
+          <option>45 - 65</option>
+          <option>65+</option>
+        </select>
+      </label>
+
+      <label className="px-4">
+        test1
+        <input
+          defaultValue="test"
+          {...register("example")}
+          className="form-input mx-4 px-4 py-3 rounded-lg"
+        />
+      </label>
       <input
         defaultValue="yalla"
         {...register("yalla")}
@@ -49,3 +129,8 @@ export default function App() {
     </form>
   );
 }
+
+const formVals = {
+  gender: ["Men", "Women", "Both"],
+  age: [],
+};
