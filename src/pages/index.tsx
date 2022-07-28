@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "../utils/trpc";
 import Image from "next/image";
+import Link from "next/link";
 
 type TechnologyCardProps = {
   name: string;
@@ -33,6 +34,10 @@ const Home: NextPage = () => {
           ShopSwap
         </h1>
         <div>are you logged in?</div>
+
+        <Link href="/form">form</Link>
+        <Link href="/matches">matches</Link>
+
         <p className="text-2xl text-gray-700">This stack uses:</p>
         <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
           <TechnologyCard
