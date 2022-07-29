@@ -21,15 +21,15 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto flex flex-col items-center justify-center h-screen p-4">
-        <span className="hover:rotate-180 transition ease-linear duration-300">
+      <main className="container mx-auto my-2 flex flex-col items-center justify-center h-screen p-4">
+        <div className="m-4 hover:rotate-180 transition ease-linear duration-300">
           <Image
             src="/image05.png"
             alt="swapshop logo"
             width={100}
             height={100}
           />
-        </span>
+        </div>
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
           ShopSwap
         </h1>

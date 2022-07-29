@@ -11,6 +11,9 @@ type Inputs = {
   age: Array<string>;
   income: Array<string>;
   exampleRequired: string;
+  niche: string;
+  psycho: string;
+  intl: boolean;
 };
 
 const Form: NextPage = () => {
@@ -109,18 +112,18 @@ const Form: NextPage = () => {
             </select>
           </label>
 
-          {/* <label className="px-4 flex flex-auto align-middle items-center">
-            Are you open to partnering with an international brand?
-            <input
-              type={"radio"}
+          <label className="px-4 flex flex-auto align-middle items-center">
+            Does your brand target any of the following psychographic niches?
+            <select
               multiple={true}
               {...register("intl")}
-              className="form-radio mx-4 flex flex-col flex-auto px-4 py-3 rounded-lg"
+              className="form-multiselect mx-4 flex flex-col flex-auto px-4 py-3 rounded-lg"
             >
-              <option>Yes</option>
-              <option>Yes</option>
-            </input>
-          </label> */}
+              <option>Adventure</option>
+              <option>Alt/Hipster</option>
+              <option>Biz</option>
+            </select>
+          </label>
 
           <input
             placeholder="Select your option"

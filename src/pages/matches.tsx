@@ -223,8 +223,21 @@ interface QuestionResponses {
 
 // console.log(picked);
 
+// function to filter array of objects by another array
+function filterBy(arr: any[], filter: any[]) {
+  return arr.filter((obj) => {
+    return filter.includes(obj);
+  });
+}
+
 const Matches: NextPage = () => {
   const [picks, setPicks] = useState<QuestionResponses[]>([]);
+
+  const filtered = dummy.filter((item) => {
+    return !picks.includes(item);
+  });
+
+  console.log(filtered);
 
   return (
     <>
@@ -237,9 +250,12 @@ const Matches: NextPage = () => {
             <hr />
             <div className="py-4">
               {picks.map((pick, index) => (
-                <p key={index}>
-                  {pick.age}, {pick.brandName}
-                </p>
+                <div key={index} className="flex flex-col">
+                  <p>
+                    {pick.age}, {pick.brandName}
+                  </p>
+                  {/* <button onClick={""}>remove</button> */}
+                </div>
               ))}
             </div>
             <hr />
@@ -248,18 +264,22 @@ const Matches: NextPage = () => {
 
         {/* {picked ?? picked.} */}
         <ul>
-          {dummy.map((item, index) => {
-            return (
-              <li key={index}>
-                <div className="p-4 m-4 border rounded-md border-solid border-zinc-600 hover:text-blue-600 hover:border-blue-500 transition-all ease-linear ">
-                  {item.brandName}, {item.location}, {item.age}
-                  <button onClick={() => setPicks([...picks, item])}>
-                    Add
-                  </button>
-                </div>
-              </li>
-            );
-          })}
+          {dummy
+            .filter((item) => {
+              return !picks.includes(item);
+            })
+            .map((item, index) => {
+              return (
+                <li key={index}>
+                  <div className="p-4 m-4 border rounded-md border-solid border-zinc-600 hover:text-blue-600 hover:border-blue-500 transition-all ease-linear ">
+                    {item.brandName}, {item.location}, {item.age}
+                    <button onClick={() => setPicks([...picks, item])}>
+                      Add
+                    </button>
+                  </div>
+                </li>
+              );
+            })}
         </ul>
       </div>
     </>
