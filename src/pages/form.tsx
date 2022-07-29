@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "Zod";
 
-type Inputs = {
+interface Inputs {
   example: string;
   yalla: string;
   gender: string;
@@ -15,7 +15,7 @@ type Inputs = {
   psycho: string;
   intl: boolean;
   values: Array<String>;
-};
+}
 
 const Form: NextPage = () => {
   const {
@@ -49,7 +49,7 @@ const Form: NextPage = () => {
             <select
               defaultValue=""
               {...register("gender")}
-              className="form-select flex flex-1 mx-4 px-4 py-3 rounded-lg"
+              className="form-select flex flex-1 m-4 px-4 py-3 rounded-lg"
             >
               <option>Men</option>
               <option>Women</option>

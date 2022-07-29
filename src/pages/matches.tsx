@@ -221,6 +221,14 @@ interface QuestionResponses {
   location: string;
 }
 
+// function to remove item from array
+function removeItem(array: any[], item: any) {
+  const index = array.indexOf(item);
+  if (index > -1) {
+    array.splice(index, 1);
+  }
+}
+
 // console.log(picked);
 
 const Matches: NextPage = () => {
@@ -240,6 +248,7 @@ const Matches: NextPage = () => {
         {picks.length > 0 && (
           <div className="my-4">
             <p className="font-bold text-lg">Picks</p>
+            <button onClick={() => setPicks([])}>clear</button>
             <hr />
             <div className="py-4">
               {picks.map((pick, index) => (
@@ -247,7 +256,7 @@ const Matches: NextPage = () => {
                   <p>
                     {pick.age}, {pick.brandName}
                   </p>
-                  {/* <button onClick={""}>remove</button> */}
+                  <button onClick={""}>remove</button>
                 </div>
               ))}
             </div>
