@@ -1,249 +1,268 @@
 import { NextPage } from "next";
+import { useState } from "react";
 
 const dummy = [
   {
     age: "19-24, 25-34",
-    "What kind of brand partnership would you like to run":
-      "Discount Code Giveaway",
-    "Does your brand predominantly target men, women or both?": "Both",
-    "Does your brand target any of the following familial niches?":
-      "Singles, Couples, New Parents",
-    "What income ranges does your brand target?":
-      "50k-100k / Year, 100k - 250k / Year",
-    "Are you open to partnering with an international brand?": "No",
-    "Does your brand target any of the following psychographic niches?":
+    brandPartnerships: "Discount Code Giveaway",
+    genderFocus: "Both",
+    famNiches: "Singles, Couples, New Parents",
+    incomeRange: "50k-100k / Year, 100k - 250k / Year",
+    intlPartnership: "No",
+    psychoNiches:
       "Adventurers / Outdoor Enthusiasts, Alternative / Hipster, Health and Wellness Enthusiasts, Music Fans, Travellers",
-    "Which values best fit with your brand?": "Sustainability, Affordability",
-    "Company Name": "Primark",
-    Location: "UK",
+    brandValues: "Sustainability, Affordability",
+    brandName: "Primark",
+    location: "UK",
   },
   {
     age: "14-18, 19-24, 25-34, 35-44, 45-65, 65+",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Co-Branding, Contest / Sweepstake, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Women",
-    "Does your brand target any of the following familial niches?":
-      "Singles, Couples",
-    "What income ranges does your brand target?":
+    genderFocus: "Women",
+    famNiches: "Singles, Couples",
+    incomeRange:
       "0-50k / Year, 50k-100k / Year, 100k - 250k / Year, 250k+ /Year",
-    "Are you open to partnering with an international brand?": "Yes",
-    "Does your brand target any of the following psychographic niches?":
+    intlPartnership: "Yes",
+    psychoNiches:
       "Adventurers / Outdoor Enthusiasts, Alternative / Hipster, Business Professionals, Fashionistas, Health and Wellness Enthusiasts, Technology Enthusiasts, Travellers",
-    "Which values best fit with your brand?": "Gender Equality, Luxury",
-    "Company Name": "PopSockets",
-    Location: "USA",
+    brandValues: "Gender Equality, Luxury",
+    brandName: "PopSockets",
+    location: "USA",
   },
   {
     age: "25-34, 35-44",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway",
-    "Does your brand predominantly target men, women or both?": "Women",
-    "Does your brand target any of the following familial niches?":
-      "Singles, Couples, New Parents",
-    "What income ranges does your brand target?": "50k-100k / Year",
-    "Are you open to partnering with an international brand?": "No",
-    "Does your brand target any of the following psychographic niches?":
+    genderFocus: "Women",
+    famNiches: "Singles, Couples, New Parents",
+    incomeRange: "50k-100k / Year",
+    intlPartnership: "No",
+    psychoNiches:
       "Family Oriented, Health and Wellness Enthusiasts, Travellers, Vegetarians / Vegan",
-    "Which values best fit with your brand?":
-      "Convenience, Sustainability, affordability",
-    "Company Name": "Method",
-    Location: "USA",
+    brandValues: "Convenience, Sustainability, affordability",
+    brandName: "Method",
+    location: "USA",
   },
   {
     age: "25-34",
-    "What kind of brand partnership would you like to run": "Co-Branding",
-    "Does your brand predominantly target men, women or both?": "Both",
-    "Does your brand target any of the following familial niches?": "Couples",
-    "What income ranges does your brand target?": "100k - 250k / Year",
-    "Are you open to partnering with an international brand?": "Yes",
-    "Does your brand target any of the following psychographic niches?":
-      "Health and Wellness Enthusiasts",
-    "Which values best fit with your brand?": "Quality, Minimalism",
-    "Company Name": "Lipton",
-    Location: "UK",
+    brandPartnerships: "Co-Branding",
+    genderFocus: "Both",
+    famNiches: "Couples",
+    incomeRange: "100k - 250k / Year",
+    intlPartnership: "Yes",
+    psychoNiches: "Health and Wellness Enthusiasts",
+    brandValues: "Quality, Minimalism",
+    brandName: "Lipton",
+    location: "UK",
   },
   {
     age: "25-34",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Co-Branding, Contest / Sweepstake, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Women",
-    "Does your brand target any of the following familial niches?":
-      "New Parents",
-    "What income ranges does your brand target?": "50k-100k / Year",
-    "Are you open to partnering with an international brand?": "No",
-    "Does your brand target any of the following psychographic niches?":
-      "Family Oriented",
-    "Which values best fit with your brand?": "Sustainability, Convenience",
-    "Company Name": "Gerber",
-    Location: "USA",
+    genderFocus: "Women",
+    famNiches: "New Parents",
+    incomeRange: "50k-100k / Year",
+    intlPartnership: "No",
+    psychoNiches: "Family Oriented",
+    brandValues: "Sustainability, Convenience",
+    brandName: "Gerber",
+    location: "USA",
   },
   {
     age: "19-24, 25-34, 35-44, 45-65, 65+",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Contest / Sweepstake, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Both",
-    "Does your brand target any of the following familial niches?":
-      "Singles, Couples, New Parents",
-    "What income ranges does your brand target?":
+    genderFocus: "Both",
+    famNiches: "Singles, Couples, New Parents",
+    incomeRange:
       "0-50k / Year, 50k-100k / Year, 100k - 250k / Year, 250k+ /Year",
-    "Are you open to partnering with an international brand?": "No",
-    "Does your brand target any of the following psychographic niches?":
+    intlPartnership: "No",
+    psychoNiches:
       "Adventurers / Outdoor Enthusiasts, Alternative / Hipster, Food & Cooking Enthusiasts, Family Oriented, Fashionistas, Health and Wellness Enthusiasts, Self - Improvement Enthusiasts, Vegetarians / Vegan, Other",
-    "Which values best fit with your brand?": "Sustainability, Minimalism",
-    "Company Name": "Spruce",
-    Location: "UK",
+    brandValues: "Sustainability, Minimalism",
+    brandName: "Spruce",
+    location: "UK",
   },
   {
     age: "25-34, 35-44",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Co-Branding, Contest / Sweepstake, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Both",
-    "Does your brand target any of the following familial niches?": "Singles",
-    "What income ranges does your brand target?":
-      "50k-100k / Year, 100k - 250k / Year",
-    "Are you open to partnering with an international brand?": "Yes",
-    "Does your brand target any of the following psychographic niches?":
-      "Fashionistas, Health and Wellness Enthusiasts, Music Fans",
-    "Which values best fit with your brand?":
-      "Support for Minorities, Affordability",
-    "Company Name": "Jo Malone",
-    Location: "UK",
+    genderFocus: "Both",
+    famNiches: "Singles",
+    incomeRange: "50k-100k / Year, 100k - 250k / Year",
+    intlPartnership: "Yes",
+    psychoNiches: "Fashionistas, Health and Wellness Enthusiasts, Music Fans",
+    brandValues: "Support for Minorities, Affordability",
+    brandName: "Jo Malone",
+    location: "UK",
   },
   {
     age: "25-34",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Product Giveaway, Discount Code Giveaway, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Both",
-    "Does your brand target any of the following familial niches?":
-      "Singles, Couples, New Parents",
-    "What income ranges does your brand target?": "0-50k / Year",
-    "Are you open to partnering with an international brand?": "No",
-    "Does your brand target any of the following psychographic niches?":
-      "Vegetarians / Vegan",
-    "Which values best fit with your brand?": "Vegan, Sustainability, Luxury",
-    "Company Name": "Ghirardelli",
-    Location: "USA",
+    genderFocus: "Both",
+    famNiches: "Singles, Couples, New Parents",
+    incomeRange: "0-50k / Year",
+    intlPartnership: "No",
+    psychoNiches: "Vegetarians / Vegan",
+    brandValues: "Vegan, Sustainability, Luxury",
+    brandName: "Ghirardelli",
+    location: "USA",
   },
   {
     age: "25-34",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Contest / Sweepstake, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Women",
-    "Does your brand target any of the following familial niches?": "Couples",
-    "What income ranges does your brand target?": "0-50k / Year",
-    "Are you open to partnering with an international brand?": "Yes",
-    "Does your brand target any of the following psychographic niches?":
-      "Fashionistas",
-    "Which values best fit with your brand?": "Luxury, Quality",
-    "Company Name": "HommeGirls",
-    Location: "UK",
+    genderFocus: "Women",
+    famNiches: "Couples",
+    incomeRange: "0-50k / Year",
+    intlPartnership: "Yes",
+    psychoNiches: "Fashionistas",
+    brandValues: "Luxury, Quality",
+    brandName: "HommeGirls",
+    location: "UK",
   },
   {
     age: "0-7, 7-13, 14-18, 19-24, 25-34, 35-44, 45-65, 65+",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Co-Branding, Contest / Sweepstake, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Both",
-    "Does your brand target any of the following familial niches?":
-      "Singles, Couples, New Parents",
-    "What income ranges does your brand target?":
+    genderFocus: "Both",
+    famNiches: "Singles, Couples, New Parents",
+    incomeRange:
       "0-50k / Year, 50k-100k / Year, 100k - 250k / Year, 250k+ /Year",
-    "Are you open to partnering with an international brand?": "Yes",
-    "Does your brand target any of the following psychographic niches?":
+    intlPartnership: "Yes",
+    psychoNiches:
       "Adventurers / Outdoor Enthusiasts, Business Professionals, Food & Cooking Enthusiasts, Family Oriented, Health and Wellness Enthusiasts, Self - Improvement Enthusiasts, Travellers, Vegetarians / Vegan",
-    "Which values best fit with your brand?": "Quality, Vegan",
-    "Company Name": "Magic Spoon",
-    Location: "USA",
+    brandValues: "Quality, Vegan",
+    brandName: "Magic Spoon",
+    location: "USA",
   },
   {
     age: "25-34",
-    "What kind of brand partnership would you like to run":
-      "Product Giveaway, Co-Branding",
-    "Does your brand predominantly target men, women or both?": "Men",
-    "Does your brand target any of the following familial niches?":
-      "Singles, Couples",
-    "What income ranges does your brand target?": "50k-100k / Year",
-    "Are you open to partnering with an international brand?": "Yes",
-    "Does your brand target any of the following psychographic niches?":
-      "Business Professionals",
-    "Which values best fit with your brand?": "Gender Equality, Affordability",
-    "Company Name": "TUMI",
-    Location: "USA",
+    brandPartnerships: "Product Giveaway, Co-Branding",
+    genderFocus: "Men",
+    famNiches: "Singles, Couples",
+    incomeRange: "50k-100k / Year",
+    intlPartnership: "Yes",
+    psychoNiches: "Business Professionals",
+    brandValues: "Gender Equality, Affordability",
+    brandName: "TUMI",
+    location: "USA",
   },
   {
     age: "19-24, 25-34, 35-44",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Discount Code Giveaway, Co-Branding, Contest / Sweepstake, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Women",
-    "Does your brand target any of the following familial niches?":
-      "Singles, Couples, New Parents",
-    "What income ranges does your brand target?": "100k - 250k / Year",
-    "Are you open to partnering with an international brand?": "No",
-    "Does your brand target any of the following psychographic niches?":
+    genderFocus: "Women",
+    famNiches: "Singles, Couples, New Parents",
+    incomeRange: "100k - 250k / Year",
+    intlPartnership: "No",
+    psychoNiches:
       "Alternative / Hipster, Business Professionals, Food & Cooking Enthusiasts, Fashionistas, Health and Wellness Enthusiasts, Music Fans, Self - Improvement Enthusiasts, Technology Enthusiasts, Travellers",
-    "Which values best fit with your brand?": "Convenience, Minimalism",
-    "Company Name": "Olipop",
-    Location: "USA",
+    brandValues: "Convenience, Minimalism",
+    brandName: "Olipop",
+    location: "USA",
   },
   {
     age: "25-34, 35-44",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Co-Branding, Contest / Sweepstake, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Women",
-    "Does your brand target any of the following familial niches?": "Singles",
-    "What income ranges does your brand target?": "50k-100k / Year",
-    "Are you open to partnering with an international brand?": "Yes",
-    "Does your brand target any of the following psychographic niches?":
-      "Fashionistas",
-    "Which values best fit with your brand?": "Quality, Luxury",
-    "Company Name": "Savette",
-    Location: "USA",
+    genderFocus: "Women",
+    famNiches: "Singles",
+    incomeRange: "50k-100k / Year",
+    intlPartnership: "Yes",
+    psychoNiches: "Fashionistas",
+    brandValues: "Quality, Luxury",
+    brandName: "Savette",
+    location: "USA",
   },
   {
     age: "25-34, 35-44, 45-65",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Women",
-    "Does your brand target any of the following familial niches?": "Couples",
-    "What income ranges does your brand target?":
-      "50k-100k / Year, 100k - 250k / Year",
-    "Are you open to partnering with an international brand?": "Yes",
-    "Does your brand target any of the following psychographic niches?":
+    genderFocus: "Women",
+    famNiches: "Couples",
+    incomeRange: "50k-100k / Year, 100k - 250k / Year",
+    intlPartnership: "Yes",
+    psychoNiches:
       "Business Professionals, Fashionistas, Health and Wellness Enthusiasts",
-    "Which values best fit with your brand?": "Quality, Affordability",
-    "Company Name": "Lululemon",
-    Location: "USA",
+    brandValues: "Quality, Affordability",
+    brandName: "Lululemon",
+    location: "USA",
   },
   {
     age: "19-24, 25-34, 35-44, 45-65",
-    "What kind of brand partnership would you like to run":
+    brandPartnerships:
       "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Co-Branding, Contest / Sweepstake, Content Collaboration",
-    "Does your brand predominantly target men, women or both?": "Both",
-    "Does your brand target any of the following familial niches?":
-      "Singles, Couples",
-    "What income ranges does your brand target?":
+    genderFocus: "Both",
+    famNiches: "Singles, Couples",
+    incomeRange:
       "0-50k / Year, 50k-100k / Year, 100k - 250k / Year, 250k+ /Year",
-    "Are you open to partnering with an international brand?": "No",
-    "Does your brand target any of the following psychographic niches?":
+    intlPartnership: "No",
+    psychoNiches:
       "Adventurers / Outdoor Enthusiasts, Business Professionals, Music Fans, Self - Improvement Enthusiasts, Sports Fans, Travellers",
-    "Which values best fit with your brand?":
-      "Support for Minorities, Affordability, Quality",
-    "Company Name": "Golden Ratio",
-    Location: "UK",
+    brandValues: "Support for Minorities, Affordability, Quality",
+    brandName: "Golden Ratio",
+    location: "UK",
   },
 ];
 
+interface QuestionResponses {
+  age: string;
+  brandPartnerships: string;
+  genderFocus: string;
+  famNiches: string;
+  incomeRange: string;
+  intlPartnership: string;
+  psychoNiches: string;
+  brandValues: string;
+  brandName: string;
+  location: string;
+}
+
+// console.log(picked);
+
 const Matches: NextPage = () => {
+  const [picks, setPicks] = useState<QuestionResponses[]>([]);
+
   return (
-    <div className="container mx-auto text-center">
-      <p className="text-4xl font-bold py-4">Matches</p>
-      <div>
-        {dummy.map((item, index) => (
-          <div>
-            {item["Company Name"]}, {item.Location}, {item.age}
+    <>
+      <div className="container mx-auto text-center">
+        <p className="text-4xl font-bold py-4">Matches</p>
+
+        {picks.length > 0 && (
+          <div className="my-4">
+            <p className="font-bold text-lg">Picks</p>
+            <hr />
+            <div className="py-4">
+              {picks.map((pick, index) => (
+                <p key={index}>
+                  {pick.age}, {pick.brandName}
+                </p>
+              ))}
+            </div>
+            <hr />
           </div>
-        ))}
+        )}
+
+        {/* {picked ?? picked.} */}
+        <ul>
+          {dummy.map((item, index) => {
+            return (
+              <li key={index}>
+                <div className="p-4 m-4 border rounded-md border-solid border-zinc-600 hover:text-blue-600 hover:border-blue-500 transition-all ease-linear ">
+                  {item.brandName}, {item.location}, {item.age}
+                  <button onClick={() => setPicks([...picks, item])}>
+                    Add
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-    </div>
+    </>
   );
 };
 
