@@ -2,7 +2,8 @@ import { NextPage } from "next";
 import React from "react";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "Zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
 interface Inputs {
   example: string;
@@ -17,21 +18,36 @@ interface Inputs {
   values: Array<String>;
 }
 
+const formSchema = z.object({
+  example: z.string(),
+  yalla: z.string(),
+  gender: z.string(),
+  age: z.string().array(),
+  income: z.string().array(),
+  exampleRequired: z.string(),
+  niche: z.string(),
+  psycho: z.string(),
+  intl: z.boolean(),
+  values: z.string().array().max(5, { message: "Please select 5 or fewer" }),
+});
+
+type FormProps = z.infer<typeof formSchema>;
+
 const Form: NextPage = () => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  } = useForm<FormProps>({ resolver: zodResolver(formSchema) });
+  const onSubmit: SubmitHandler<FormProps> = (data) => console.log(data);
   const watchAllFields = watch();
 
   const [age, setAge] = useState("");
 
   console.log(watch());
 
-  console.log(watch("example")); // watch input value by passing the name of it
+  // console.log(watch("example")); // watch input value by passing the name of it
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -136,6 +152,11 @@ const Form: NextPage = () => {
               <option>Other</option>
             </select>
           </label>
+          {errors.values?.message && (
+            <p className="text-red-400 font-semibold animate-pulse">
+              {errors.values?.message}
+            </p>
+          )}
 
           <input
             placeholder="Select your option"
