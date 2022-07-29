@@ -14,6 +14,7 @@ type Inputs = {
   niche: string;
   psycho: string;
   intl: boolean;
+  values: Array<String>;
 };
 
 const Form: NextPage = () => {
@@ -35,27 +36,29 @@ const Form: NextPage = () => {
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <>
-      <div className="container mx-auto flex flex-col items-center justify-center h-screen p-4">
+      <div className="container mx-auto flex flex-col items-center justify-center p-4">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col p-4 mx-auto text-center border border-solid border-gray-300 rounded-lg shadow-lg"
         >
           {/* register your input into the hook by invoking the "register" function */}
 
-          <label className="px-4 flex flex-auto align-middle items-center">
+          {/* <div className="flex flex-col"> */}
+          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
             Does your brand predominantly target men, women, or both?
             <select
               defaultValue=""
               {...register("gender")}
-              className="form-select mx-4 px-4 py-3 rounded-lg"
+              className="form-select flex flex-1 mx-4 px-4 py-3 rounded-lg"
             >
               <option>Men</option>
               <option>Women</option>
               <option>Both</option>
             </select>
           </label>
+          {/* </div> */}
 
-          <label className="px-4 flex flex-auto align-middle items-center">
+          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
             What age ranges does your brand target?
             <select
               multiple={true}
@@ -72,7 +75,7 @@ const Form: NextPage = () => {
             </select>
           </label>
 
-          <label className="px-4 flex flex-auto align-middle items-center">
+          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
             What income ranges does your brand target?
             <select
               multiple={true}
@@ -86,7 +89,7 @@ const Form: NextPage = () => {
             </select>
           </label>
 
-          <label className="px-4 flex flex-auto align-middle items-center">
+          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
             Does your brand target any of the following familial niches?
             <select
               multiple={true}
@@ -99,7 +102,7 @@ const Form: NextPage = () => {
             </select>
           </label>
 
-          <label className="px-4 flex flex-auto align-middle items-center">
+          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
             Does your brand target any of the following psychographic niches?
             <select
               multiple={true}
@@ -112,16 +115,25 @@ const Form: NextPage = () => {
             </select>
           </label>
 
-          <label className="px-4 flex flex-auto align-middle items-center">
-            Does your brand target any of the following psychographic niches?
+          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
+            Which values best fit with your brand? (max: 5)
             <select
               multiple={true}
-              {...register("intl")}
+              {...register("values")}
               className="form-multiselect mx-4 flex flex-col flex-auto px-4 py-3 rounded-lg"
             >
-              <option>Adventure</option>
-              <option>Alt/Hipster</option>
-              <option>Biz</option>
+              <option>Affordability</option>
+              <option>Charitable support</option>
+              <option>Convenience</option>
+              <option>Gender Equality</option>
+              <option>LGBTQIA+ Ally</option>
+              <option>Luxury</option>
+              <option>Minimalism</option>
+              <option>Quality</option>
+              <option>Support for Minorities</option>
+              <option>Sustainability</option>
+              <option>Vegan</option>
+              <option>Other</option>
             </select>
           </label>
 

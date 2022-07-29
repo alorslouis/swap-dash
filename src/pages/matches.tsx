@@ -223,13 +223,6 @@ interface QuestionResponses {
 
 // console.log(picked);
 
-// function to filter array of objects by another array
-function filterBy(arr: any[], filter: any[]) {
-  return arr.filter((obj) => {
-    return filter.includes(obj);
-  });
-}
-
 const Matches: NextPage = () => {
   const [picks, setPicks] = useState<QuestionResponses[]>([]);
 
