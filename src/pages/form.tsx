@@ -18,20 +18,24 @@ interface Inputs {
   values: Array<String>;
 }
 
-const formSchema = z.object({
+const FormSchema = z.object({
   example: z.string(),
   yalla: z.string(),
-  gender: z.string(),
-  age: z.string().array(),
-  income: z.string().array(),
+  gender: z.string().min(1),
+  age: z.string().array().min(1),
+  income: z.string().array().min(1),
   exampleRequired: z.string(),
-  niche: z.string(),
-  psycho: z.string(),
-  intl: z.boolean(),
-  values: z.string().array().max(5, { message: "Please select 5 or fewer" }),
+  niche: z.string().min(1),
+  psycho: z.string().min(1),
+  intl: z.string().min(1),
+  values: z
+    .string()
+    .array()
+    .min(1)
+    .max(5, { message: "Please select 5 or fewer" }),
 });
 
-type FormProps = z.infer<typeof formSchema>;
+type FormProps = z.infer<typeof FormSchema>;
 
 const Form: NextPage = () => {
   const {
@@ -39,13 +43,13 @@ const Form: NextPage = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<FormProps>({ resolver: zodResolver(formSchema) });
+  } = useForm<FormProps>({ resolver: zodResolver(FormSchema) });
   const onSubmit: SubmitHandler<FormProps> = (data) => console.log(data);
   const watchAllFields = watch();
 
   const [age, setAge] = useState("");
 
-  console.log(watch());
+  // console.log(watch());
 
   // console.log(watch("example")); // watch input value by passing the name of it
 
@@ -130,6 +134,42 @@ const Form: NextPage = () => {
               <option>Biz</option>
             </select>
           </label>
+
+          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
+            Are you open to partnering with an international brand?
+            <div>
+              <label>
+                Yes
+                <input
+                  {...register("intl")}
+                  type="radio"
+                  value="true"
+                  className="mx-2"
+                />
+              </label>
+              <label>
+                No
+                <input
+                  {...register("intl")}
+                  type="radio"
+                  value="false"
+                  className="mx-2"
+                />
+              </label>
+            </div>
+            {/* <select
+              {...register("intl")}
+              className="form-select mx-4 flex flex-col flex-auto px-4 py-3 rounded-lg"
+            >
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select> */}
+          </label>
+          {errors.intl?.message && (
+            <p className="text-red-400 font-semibold animate-pulse">
+              {errors.intl?.message}
+            </p>
+          )}
 
           <label className="px-4 my-4 align-middle flex flex-1 flex-col">
             Which values best fit with your brand? (max: 5)

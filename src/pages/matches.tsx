@@ -243,7 +243,7 @@ const Matches: NextPage = () => {
     return !picks.includes(item);
   });
 
-  console.log(filtered);
+  // console.log(filtered);
 
   return (
     <>
@@ -252,7 +252,7 @@ const Matches: NextPage = () => {
 
         {picks.length > 0 && (
           <div className="my-4">
-            <p className="font-bold text-lg">Picks</p>
+            <p className="font-bold text-lg">My Picks</p>
 
             {/* clear picks array by setting as an empty array */}
 
