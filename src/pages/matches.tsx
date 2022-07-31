@@ -36,7 +36,25 @@ const Matches: NextPage = () => {
     },
   });
 
+  const dummyProfile: QuestionResponses = {
+    age: "25-34, 35-44, 45-65",
+    brandPartnerships:
+      "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Content Collaboration",
+    genderFocus: "Women",
+    famNiches: "Couples",
+    incomeRange: "50k-100k / Year, 100k - 250k / Year",
+    intlPartnership: "Yes",
+    psychoNiches:
+      "Business Professionals, Fashionistas, Health and Wellness Enthusiasts",
+    brandValues: "Quality, Affordability",
+    brandName: "Garamondi",
+    location: "USA",
+  };
+
   const filtered = dummy.filter((item) => {
+    if (dummyProfile.intlPartnership == "No") {
+      return !picks.includes(item) && item.location === dummyProfile.location;
+    }
     return !picks.includes(item);
   });
 

@@ -21,7 +21,7 @@ export default function Layout({ children, pageTitle }: any) {
       <div className="container flex flex-col mx-auto ">
         <nav className="text-center py-4 flex flex-row items-center flex-wrap">
           <div className="flex flex-row flex-grow mx-6 items-center justify-center">
-            <div className="m-4 hover:rotate-180 transition ease-linear duration-300">
+            <div className="m-4 hover:rotate-90 transition ease-linear duration-300">
               <Image
                 src="/image05.png"
                 alt="swapshop logo"
@@ -42,9 +42,9 @@ export default function Layout({ children, pageTitle }: any) {
         </nav>
         <main className="text-center mb-12">{children}</main>
 
-        <footer className="text-center">
+        {/* <footer className="text-center">
           <p>footer</p>
-        </footer>
+        </footer> */}
       </div>
     </>
   );
