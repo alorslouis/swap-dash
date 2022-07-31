@@ -1,5 +1,100 @@
 import { NextPage } from "next";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+
+interface brandObjects extends QuestionResponses {
+  matchScore: number;
+}
+
+// console.log(calculated);
+
+interface QuestionResponses {
+  age: string;
+  brandPartnerships: string;
+  genderFocus: string;
+  famNiches: string;
+  incomeRange: string;
+  intlPartnership: string;
+  psychoNiches: string;
+  brandValues: string;
+  brandName: string;
+  location: string;
+}
+
+function filterElement(array: any[], element: any) {
+  return array.filter((item) => item !== element);
+}
+
+// console.log(picked);
+
+const Matches: NextPage = () => {
+  const [picks, setPicks] = useState<QuestionResponses[]>([]);
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      // The user is not authenticated, handle it here.
+    },
+  });
+
+  const filtered = dummy.filter((item) => {
+    return !picks.includes(item);
+  });
+
+  // console.log(filtered);
+
+  // if (status !== "authenticated") {
+  //   return <p>test</p>;
+  // }
+
+  return (
+    <>
+      <div className="container mx-auto text-center">
+        <p className="text-4xl font-bold py-4">Matches</p>
+        {/* <p className="text-4xl font-bold py-4">Matches</p> */}
+
+        {picks.length > 0 && (
+          <div className="my-4">
+            <p className="font-bold text-lg">My Picks</p>
+
+            {/* clear picks array by setting as an empty array */}
+
+            <button onClick={() => setPicks([])}>clear</button>
+
+            <hr />
+            <div className="py-4">
+              {picks.map((pick, index) => (
+                <div key={index} className="flex flex-col">
+                  <p>
+                    {pick.age}, {pick.brandName}
+                  </p>
+                  <button onClick={() => setPicks(filterElement(picks, pick))}>
+                    remove
+                  </button>
+                </div>
+              ))}
+            </div>
+            <hr />
+          </div>
+        )}
+
+        <ul>
+          {filtered.map((item, index) => {
+            return (
+              <li key={index}>
+                <div className="p-4 m-4 border rounded-md border-solid border-zinc-600 hover:text-blue-600 hover:border-blue-500 transition-all ease-linear ">
+                  {item.brandName}, {item.location}, {item.age}
+                  <button onClick={() => setPicks([...picks, item])}>
+                    Add
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </>
+  );
+};
 
 const dummy = [
   {
@@ -207,96 +302,5 @@ const dummy = [
     location: "UK",
   },
 ];
-
-interface QuestionResponses {
-  age: string;
-  brandPartnerships: string;
-  genderFocus: string;
-  famNiches: string;
-  incomeRange: string;
-  intlPartnership: string;
-  psychoNiches: string;
-  brandValues: string;
-  brandName: string;
-  location: string;
-}
-
-// // func to return a new array without specified element
-// function removeElement(array: any[], element: any) {
-//   const index = array.indexOf(element);
-//   if (index > -1) {
-//     array.splice(index, 1);
-//   }
-//   return array;
-// }
-
-function filterElement(array: any[], element: any) {
-  return array.filter((item) => item !== element);
-}
-
-// console.log(picked);
-
-const Matches: NextPage = () => {
-  const [picks, setPicks] = useState<QuestionResponses[]>([]);
-
-  const filtered = dummy.filter((item) => {
-    return !picks.includes(item);
-  });
-
-  // console.log(filtered);
-
-  return (
-    <>
-      <div className="container mx-auto text-center">
-        <p className="text-4xl font-bold py-4">Matches</p>
-
-        {picks.length > 0 && (
-          <div className="my-4">
-            <p className="font-bold text-lg">My Picks</p>
-
-            {/* clear picks array by setting as an empty array */}
-
-            <button onClick={() => setPicks([])}>clear</button>
-
-            <hr />
-            <div className="py-4">
-              {picks.map((pick, index) => (
-                <div key={index} className="flex flex-col">
-                  <p>
-                    {pick.age}, {pick.brandName}
-                  </p>
-                  <button onClick={() => setPicks(filterElement(picks, pick))}>
-                    remove
-                  </button>
-                </div>
-              ))}
-            </div>
-            <hr />
-          </div>
-        )}
-
-        {/* {picked ?? picked.} */}
-        <ul>
-          {dummy
-            .filter((item) => {
-              return !picks.includes(item);
-            })
-            .map((item, index) => {
-              return (
-                <li key={index}>
-                  <div className="p-4 m-4 border rounded-md border-solid border-zinc-600 hover:text-blue-600 hover:border-blue-500 transition-all ease-linear ">
-                    {item.brandName}, {item.location}, {item.age}
-                    <button onClick={() => setPicks([...picks, item])}>
-                      Add
-                    </button>
-                  </div>
-                </li>
-              );
-            })}
-        </ul>
-      </div>
-    </>
-  );
-};
 
 export default Matches;

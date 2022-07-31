@@ -3,6 +3,8 @@ import Head from "next/head";
 import { trpc } from "../utils/trpc";
 import Image from "next/image";
 import Link from "next/link";
+import LoginComponent from "../components/loginButton";
+import { useSession } from "next-auth/react";
 
 type TechnologyCardProps = {
   name: string;
@@ -12,6 +14,7 @@ type TechnologyCardProps = {
 
 const Home: NextPage = () => {
   const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
+  // const { data: session, status } = useSession();
 
   return (
     <>
@@ -22,19 +25,6 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="container mx-auto my-2 flex flex-col items-center justify-center p-4">
-        <div className="m-4 hover:rotate-180 transition ease-linear duration-300">
-          <Image
-            src="/image05.png"
-            alt="swapshop logo"
-            width={100}
-            height={100}
-          />
-        </div>
-        <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-700">
-          ShopSwap
-        </h1>
-        <div>are you logged in?</div>
-
         <Link href="/form">form</Link>
         <Link href="/matches">matches</Link>
 

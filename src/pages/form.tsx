@@ -45,9 +45,6 @@ const Form: NextPage = () => {
     formState: { errors },
   } = useForm<FormProps>({ resolver: zodResolver(FormSchema) });
   const onSubmit: SubmitHandler<FormProps> = (data) => console.log(data);
-  const watchAllFields = watch();
-
-  const [age, setAge] = useState("");
 
   // console.log(watch());
 
@@ -64,7 +61,7 @@ const Form: NextPage = () => {
           {/* register your input into the hook by invoking the "register" function */}
 
           {/* <div className="flex flex-col"> */}
-          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
+          <label className="px-4 mx-auto my-4 align-middle flex flex-1 flex-col">
             Does your brand predominantly target men, women, or both?
             <select
               defaultValue=""
@@ -95,7 +92,7 @@ const Form: NextPage = () => {
             </select>
           </label>
 
-          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
+          <label className="px-4 mx-auto my-4 align-middle flex flex-1 flex-col">
             What income ranges does your brand target?
             <select
               multiple={true}
@@ -144,7 +141,7 @@ const Form: NextPage = () => {
                   {...register("intl")}
                   type="radio"
                   value="true"
-                  className="mx-2"
+                  className="mx-2 form-radio"
                 />
               </label>
               <label>
@@ -154,6 +151,7 @@ const Form: NextPage = () => {
                   type="radio"
                   value="false"
                   className="mx-2"
+                  form-radio
                 />
               </label>
             </div>
@@ -212,20 +210,9 @@ const Form: NextPage = () => {
 
           <input type="submit" />
         </form>
-        <div>{age ? age : "test"}</div>
-        {/* <div>
-          {watch(["age", "example"]).map((item) => (
-            <div>{item}</div>
-          ))}
-        </div> */}
       </div>
     </>
   );
 };
 
 export default Form;
-
-const formVals = {
-  gender: ["Men", "Women", "Both"],
-  age: [],
-};
