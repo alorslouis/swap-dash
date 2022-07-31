@@ -48,21 +48,24 @@ const Matches: NextPage = () => {
       "Business Professionals, Fashionistas, Health and Wellness Enthusiasts",
     brandValues: "Quality, Affordability",
     brandName: "Garamondi",
-    location: "USA",
+    location: "UK",
   };
 
   const filtered = dummy.filter((item) => {
-    if (dummyProfile.intlPartnership == "No") {
+    // filter those brands which have been picked, &
+
+    // if international partnership === No, return only domestic brands
+    if (dummyProfile.intlPartnership === "No") {
       return !picks.includes(item) && item.location === dummyProfile.location;
     }
-    return !picks.includes(item);
+
+    // else return domestic, + those intl brands who will partner internationally
+    return (
+      !picks.includes(item) &&
+      (item.location === dummyProfile.location ||
+        item.intlPartnership === "Yes")
+    );
   });
-
-  // console.log(filtered);
-
-  // if (status !== "authenticated") {
-  //   return <p>test</p>;
-  // }
 
   return (
     <>
