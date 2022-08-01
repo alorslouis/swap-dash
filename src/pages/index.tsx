@@ -27,8 +27,37 @@ const Home: NextPage = () => {
       <main className="container mx-auto my-2 flex flex-col items-center justify-center p-4">
         <Link href="/form">form</Link>
         <Link href="/matches">matches</Link>
+        <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
+          <section className="flex flex-col justify-center p-6 duration-200 border-2 border-gray-500 rounded shadow-xl motion-safe:hover:scale-105">
+            <h2 className="text-lg font-semibold text-gray-700">
+              Brand Profile
+            </h2>
+            <p className="text-sm text-gray-600">""</p>
+            <Link
+              className="mt-3 text-sm underline text-violet-500 decoration-dotted underline-offset-2"
+              href="/form"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Link
+            </Link>
+          </section>
 
-        <p className="text-2xl text-gray-700">This stack uses:</p>
+          <section className="flex flex-col justify-center p-6 duration-200 border-2 border-gray-500 rounded shadow-xl motion-safe:hover:scale-105">
+            <h2 className="text-lg font-semibold text-gray-700">My matches</h2>
+            <p className="text-sm text-gray-600">""</p>
+            <Link
+              className="mt-3 text-sm underline text-violet-500 decoration-dotted underline-offset-2"
+              href="/matches"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Link
+            </Link>
+          </section>
+        </div>
+
+        {/* <p className="text-2xl text-gray-700">This stack uses:</p>
         <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
           <TechnologyCard
             name="NextJS"
@@ -50,13 +79,28 @@ const Home: NextPage = () => {
             description="End-to-end typesafe APIs made easy"
             documentation="https://trpc.io/"
           />
-        </div>
+        </div> */}
         <div className="pt-6 text-2xl text-blue-500 flex justify-center items-center w-full">
           {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
         </div>
       </main>
     </>
   );
+};
+
+const ProfileCard = () => {
+  <section className="flex flex-col justify-center p-6 duration-200 border-2 border-gray-500 rounded shadow-xl motion-safe:hover:scale-105">
+    <h2 className="text-lg text-gray-700">My matches</h2>
+    <p className="text-sm text-gray-600">""</p>
+    <Link
+      className="mt-3 text-sm underline text-violet-500 decoration-dotted underline-offset-2"
+      href="/matches"
+      target="_blank"
+      rel="noreferrer"
+    >
+      Link
+    </Link>
+  </section>;
 };
 
 const TechnologyCard = ({
