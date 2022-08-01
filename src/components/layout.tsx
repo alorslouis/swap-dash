@@ -43,11 +43,12 @@ export default function Layout({ children, pageTitle }: any) {
             <LoginComponent />
           </div>
         </nav>
-        {status === "authenticated" ? (
+        {/* {status === "authenticated" ? (
           <main className="text-center mb-12">{children}</main>
         ) : (
           <main className="text-center mb-12">please sign in</main>
-        )}
+        )} */}
+        <main className="text-center mb-12">{children}</main>
 
         {/* <footer className="text-center">
           <p>footer</p>
