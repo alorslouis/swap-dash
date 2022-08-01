@@ -48,10 +48,7 @@ export const dummyProfile: FormProps = {
   location: "UK",
 };
 
-export const darkModeAtom = atomWithStorage<FormProps>(
-  "darkMode",
-  dummyProfile
-);
+export const formAtom = atomWithStorage<FormProps>("formAtom", dummyProfile);
 
 const Form: NextPage = () => {
   const {
@@ -68,9 +65,10 @@ const Form: NextPage = () => {
 
   // console.log(watch());
 
-  const [darkMode, setDarkMode] = useAtom(darkModeAtom);
+  const [formData, setFormData] = useAtom(formAtom);
 
-  const onSubmit: SubmitHandler<FormProps> = (data, e) => console.log(data, e);
+  // const onSubmit: SubmitHandler<FormProps> = (data, e) => console.log(data, e);
+  const onSubmit = (data: FormProps) => console.log(data);
 
   // console.log(darkMode);
 
@@ -90,7 +88,6 @@ const Form: NextPage = () => {
           <label className="px-4 mx-auto my-4 align-middle flex flex-1 flex-col">
             What is the name of your brand?
             <input
-              defaultValue=""
               {...register("brandName")}
               className="form-input flex flex-1 m-4 px-4 py-3 rounded-lg"
             />
@@ -99,7 +96,6 @@ const Form: NextPage = () => {
           <label className="px-4 mx-auto my-4 align-middle flex flex-1 flex-col">
             In what country is your brand located?
             <input
-              defaultValue=""
               {...register("location")}
               className="form-input flex flex-1 m-4 px-4 py-3 rounded-lg"
             />
@@ -108,7 +104,6 @@ const Form: NextPage = () => {
           <label className="px-4 mx-auto my-4 align-middle flex flex-1 flex-col">
             Does your brand predominantly target men, women, or both?
             <select
-              defaultValue=""
               {...register("genderFocus")}
               className="form-select flex flex-1 m-4 px-4 py-3 rounded-lg"
             >
@@ -251,7 +246,12 @@ const Form: NextPage = () => {
           {/* errors will return when field validation fails  */}
           {/* {errors.exampleRequired && <span>This field is required</span>} */}
 
-          <button type="submit" onClick={handleSubmit(onSubmit)}>
+          <button
+            type="submit"
+            onClick={(e) => {
+              handleSubmit(onSubmit)(e);
+            }}
+          >
             Submit
           </button>
           {/* <input type="submit" /> */}

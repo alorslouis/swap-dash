@@ -13,12 +13,14 @@ This is a test project - built with the following:
 - Prisma
 - React-Query
 - Jotai
+- Auto-Animate
 
 ## To-Do
 
-[x] Jotai
-[] Supabase config
-[] Prisma config
+- [x] Jotai
+- [] Persistence
+- [] Supabase config
+- [] Prisma config
 
 # Create T3 App
 

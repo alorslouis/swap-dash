@@ -2,6 +2,10 @@ import { NextPage } from "next";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { formAtom } from "./form";
+import { useAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
+import React from "react";
 
 interface brandObjects extends QuestionResponses {
   matchScore: number;
@@ -41,11 +45,18 @@ function filterElement(array: any[], element: any) {
   return array.filter((item) => item !== element);
 }
 
+const picksAtom = atomWithStorage<QuestionResponses[]>("matches", [])!;
+
 // console.log(picked);
 
 const Matches: NextPage = () => {
+  // const [picks, setPicks] = useAtom<QuestionResponses[]>(picksAtom);
   const [picks, setPicks] = useState<QuestionResponses[]>([]);
   const [animationParent] = useAutoAnimate<HTMLUListElement>();
+
+  const [profile] = useAtom(formAtom);
+  // const [darkMode, setDarkMode] = useAtom<QuestionResponses[]>(picksAtom);
+  console.log(picks);
 
   const { status } = useSession({
     required: true,
@@ -58,13 +69,13 @@ const Matches: NextPage = () => {
     // filter those brands which have been picked, &
 
     // if international partnership === No, return only domestic brands
-    if (dummyProfile.intlPartnership === "No") {
-      return !picks.includes(item) && item.location === dummyProfile.location;
+    if (profile.intlPartnership === "No") {
+      return !picks?.includes(item) && item.location === profile.location;
     }
 
     // else return domestic, + those intl brands who will partner internationally
     return (
-      !picks.includes(item) &&
+      !picks?.includes(item) &&
       (item.location === dummyProfile.location ||
         item.intlPartnership === "Yes")
     );
@@ -73,10 +84,17 @@ const Matches: NextPage = () => {
   return (
     <>
       <div className="container mx-auto text-center">
+        <div>
+          <h2 className="text-xl font-medium">My Profile</h2>
+          <div>
+            <p>{profile.brandName}</p>
+            <p>{profile.location}</p>
+          </div>
+        </div>
         <p className="text-4xl font-bold py-4">Matches</p>
         {/* <p className="text-4xl font-bold py-4">Matches</p> */}
 
-        {picks.length > 0 && (
+        {picks?.length > 0 ? (
           <div className="my-4">
             <p className="font-bold text-lg">My Picks</p>
 
@@ -86,16 +104,18 @@ const Matches: NextPage = () => {
 
             <hr />
             <ul ref={animationParent}>
-              {picks.map((pick, index) => (
+              {picks?.map((pick, index) => (
                 <li
                   key={index}
-                  className="p-4 m-4 border rounded-md border-solid flex justify-center align-middle border-zinc-600 hover:text-blue-600 hover:border-blue-500 transition-all ease-linear"
+                  className="p-4 m-4 border rounded-md border-solid flex justify-center align-middle border-zinc-600 hover:text-red-600 hover:border-red-500 transition-all ease-linear"
                 >
                   <p>
                     {pick.brandName}, {pick.age}
                   </p>
                   <button
-                    onClick={() => setPicks(filterElement(picks, pick))}
+                    onClick={() => {
+                      return setPicks(filterElement(picks, pick));
+                    }}
                     className="ml-auto"
                   >
                     <svg
@@ -119,7 +139,7 @@ const Matches: NextPage = () => {
             </ul>
             <hr />
           </div>
-        )}
+        ) : null}
 
         <h2>available matches</h2>
         <ul ref={animationParent}>

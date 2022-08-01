@@ -2,8 +2,11 @@ import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import LoginComponent from "./loginButton";
+import { useSession } from "next-auth/react";
 
 export default function Layout({ children, pageTitle }: any) {
+  const { data: session, status } = useSession();
+
   return (
     <>
       <Head>
@@ -40,7 +43,11 @@ export default function Layout({ children, pageTitle }: any) {
             <LoginComponent />
           </div>
         </nav>
-        <main className="text-center mb-12">{children}</main>
+        {status === "authenticated" ? (
+          <main className="text-center mb-12">{children}</main>
+        ) : (
+          <main className="text-center mb-12">please sign in</main>
+        )}
 
         {/* <footer className="text-center">
           <p>footer</p>
