@@ -5,16 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import LoginComponent from "../components/loginButton";
 import { useSession } from "next-auth/react";
-
-type TechnologyCardProps = {
-  name: string;
-  description: string;
-  documentation: string;
-};
+import { useAtom } from "jotai";
+import { darkModeAtom } from "./form";
 
 const Home: NextPage = () => {
   const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
   // const { data: session, status } = useSession();
+  const [search] = useAtom(darkModeAtom);
+  console.log(search);
 
   return (
     <>
@@ -25,6 +23,10 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="container mx-auto my-2 flex flex-col items-center justify-center p-4">
+        Welcome{" "}
+        <p className="font-extrabold text-lg">
+          {search.brandName}, {search.location}
+        </p>
         <Link href="/form">form</Link>
         <Link href="/matches">matches</Link>
         <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
@@ -32,7 +34,7 @@ const Home: NextPage = () => {
             <h2 className="text-lg font-semibold text-gray-700">
               Brand Profile
             </h2>
-            <p className="text-sm text-gray-600">""</p>
+            <p className="text-sm text-gray-600"></p>
             <Link
               className="mt-3 text-sm underline text-violet-500 decoration-dotted underline-offset-2"
               href="/form"
@@ -45,7 +47,7 @@ const Home: NextPage = () => {
 
           <section className="flex flex-col justify-center p-6 duration-200 border-2 border-gray-500 rounded shadow-xl motion-safe:hover:scale-105">
             <h2 className="text-lg font-semibold text-gray-700">My matches</h2>
-            <p className="text-sm text-gray-600">""</p>
+            <p className="text-sm text-gray-600"></p>
             <Link
               className="mt-3 text-sm underline text-violet-500 decoration-dotted underline-offset-2"
               href="/matches"
@@ -56,7 +58,6 @@ const Home: NextPage = () => {
             </Link>
           </section>
         </div>
-
         {/* <p className="text-2xl text-gray-700">This stack uses:</p>
         <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
           <TechnologyCard
@@ -91,7 +92,7 @@ const Home: NextPage = () => {
 const ProfileCard = () => {
   <section className="flex flex-col justify-center p-6 duration-200 border-2 border-gray-500 rounded shadow-xl motion-safe:hover:scale-105">
     <h2 className="text-lg text-gray-700">My matches</h2>
-    <p className="text-sm text-gray-600">""</p>
+    <p className="text-sm text-gray-600"></p>
     <Link
       className="mt-3 text-sm underline text-violet-500 decoration-dotted underline-offset-2"
       href="/matches"
@@ -101,6 +102,12 @@ const ProfileCard = () => {
       Link
     </Link>
   </section>;
+};
+
+type TechnologyCardProps = {
+  name: string;
+  description: string;
+  documentation: string;
 };
 
 const TechnologyCard = ({

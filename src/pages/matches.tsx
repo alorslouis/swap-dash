@@ -82,14 +82,34 @@ const Matches: NextPage = () => {
             <button onClick={() => setPicks([])}>clear</button>
 
             <hr />
-            <div className="py-4">
+            <div className="">
               {picks.map((pick, index) => (
-                <div key={index} className="flex flex-col">
+                <div
+                  key={index}
+                  className="p-4 m-4 border rounded-md border-solid flex justify-center align-middle border-zinc-600 hover:text-blue-600 hover:border-blue-500 transition-all ease-linear"
+                >
                   <p>
-                    {pick.age}, {pick.brandName}
+                    {pick.brandName}, {pick.age}
                   </p>
-                  <button onClick={() => setPicks(filterElement(picks, pick))}>
-                    remove
+                  <button
+                    onClick={() => setPicks(filterElement(picks, pick))}
+                    className="ml-auto"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      className="feather feather-minus-circle"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
                   </button>
                 </div>
               ))}
@@ -98,14 +118,33 @@ const Matches: NextPage = () => {
           </div>
         )}
 
+        <h2>available matches</h2>
         <ul>
           {filtered.map((item, index) => {
             return (
               <li key={index}>
-                <div className="p-4 m-4 border rounded-md border-solid border-zinc-600 hover:text-blue-600 hover:border-blue-500 transition-all ease-linear ">
+                <div className="p-4 m-4 border rounded-md border-solid flex justify-center align-middle border-zinc-600 hover:text-blue-600 hover:border-blue-500 transition-all ease-linear ">
                   {item.brandName}, {item.location}, {item.age}
-                  <button onClick={() => setPicks([...picks, item])}>
-                    Add
+                  <button
+                    onClick={() => setPicks([...picks, item])}
+                    className="ml-auto"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      className="feather feather-plus-circle"
+                    >
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <line x1="12" y1="8" x2="12" y2="16"></line>
+                      <line x1="8" y1="12" x2="16" y2="12"></line>
+                    </svg>
                   </button>
                 </div>
               </li>
