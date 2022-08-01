@@ -2,11 +2,23 @@
 
 This is a test project - built with the following:
 
+- Next.js
+- TypeScript
+- Tailwind
+- Next-Auth
+- React-Hook-Form
+- tRPC
+- Zod
+- Supabase
+- Prisma
+- React-Query
+- Jotai
+
 ## To-Do
 
-- [x] Jotai
-- [] Supabase config
-- [] Prisma config
+[x] Jotai
+[] Supabase config
+[] Prisma config
 
 # Create T3 App
 
