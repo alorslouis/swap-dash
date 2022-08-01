@@ -1,4 +1,6 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
+import { User as NextAuthUser } from "next-auth";
+
 import DiscordProvider from "next-auth/providers/discord";
 import GitHubProvider from "next-auth/providers/github";
 
@@ -6,6 +8,10 @@ import GitHubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "../../../server/db/client";
 import { env } from "../../../env/server.mjs";
+
+interface NextAuthUserWithStringId extends NextAuthUser {
+  id: string;
+}
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
@@ -27,6 +33,14 @@ export const authOptions: NextAuthOptions = {
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      profile(profile) {
+        return {
+          id: profile.id.toString(),
+          name: profile.name || profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
+        } as NextAuthUserWithStringId;
+      },
     }),
     // ...add more providers here
   ],
