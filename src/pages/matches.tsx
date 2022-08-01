@@ -1,6 +1,7 @@
 import { NextPage } from "next";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 interface brandObjects extends QuestionResponses {
   matchScore: number;
@@ -21,6 +22,21 @@ interface QuestionResponses {
   location: string;
 }
 
+const dummyProfile: QuestionResponses = {
+  age: "25-34, 35-44, 45-65",
+  brandPartnerships:
+    "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Content Collaboration",
+  genderFocus: "Women",
+  famNiches: "Couples",
+  incomeRange: "50k-100k / Year, 100k - 250k / Year",
+  intlPartnership: "Yes",
+  psychoNiches:
+    "Business Professionals, Fashionistas, Health and Wellness Enthusiasts",
+  brandValues: "Quality, Affordability",
+  brandName: "Garamondi",
+  location: "UK",
+};
+
 function filterElement(array: any[], element: any) {
   return array.filter((item) => item !== element);
 }
@@ -29,27 +45,14 @@ function filterElement(array: any[], element: any) {
 
 const Matches: NextPage = () => {
   const [picks, setPicks] = useState<QuestionResponses[]>([]);
+  const [animationParent] = useAutoAnimate<HTMLUListElement>();
+
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
       // The user is not authenticated, handle it here.
     },
   });
-
-  const dummyProfile: QuestionResponses = {
-    age: "25-34, 35-44, 45-65",
-    brandPartnerships:
-      "Social Media Cross Promotion / Referral Marketing, Product Giveaway, Discount Code Giveaway, Content Collaboration",
-    genderFocus: "Women",
-    famNiches: "Couples",
-    incomeRange: "50k-100k / Year, 100k - 250k / Year",
-    intlPartnership: "Yes",
-    psychoNiches:
-      "Business Professionals, Fashionistas, Health and Wellness Enthusiasts",
-    brandValues: "Quality, Affordability",
-    brandName: "Garamondi",
-    location: "UK",
-  };
 
   const filtered = dummy.filter((item) => {
     // filter those brands which have been picked, &
@@ -82,9 +85,9 @@ const Matches: NextPage = () => {
             <button onClick={() => setPicks([])}>clear</button>
 
             <hr />
-            <div className="">
+            <ul ref={animationParent}>
               {picks.map((pick, index) => (
-                <div
+                <li
                   key={index}
                   className="p-4 m-4 border rounded-md border-solid flex justify-center align-middle border-zinc-600 hover:text-blue-600 hover:border-blue-500 transition-all ease-linear"
                 >
@@ -102,24 +105,24 @@ const Matches: NextPage = () => {
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       className="feather feather-minus-circle"
                     >
                       <circle cx="12" cy="12" r="10"></circle>
                       <line x1="8" y1="12" x2="16" y2="12"></line>
                     </svg>
                   </button>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
             <hr />
           </div>
         )}
 
         <h2>available matches</h2>
-        <ul>
+        <ul ref={animationParent}>
           {filtered.map((item, index) => {
             return (
               <li key={index}>
@@ -136,9 +139,9 @@ const Matches: NextPage = () => {
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       className="feather feather-plus-circle"
                     >
                       <circle cx="12" cy="12" r="10"></circle>

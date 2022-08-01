@@ -26,7 +26,7 @@ const FormSchema = z.object({
 
 type FormProps = z.infer<typeof FormSchema>;
 
-const dummyProfile: FormProps = {
+export const dummyProfile: FormProps = {
   age: ["25-34", "35-44", "45-65"],
   brandPartnerships: [
     "Social Media Cross Promotion / Referral Marketing",
@@ -124,7 +124,7 @@ const Form: NextPage = () => {
             <select
               multiple={true}
               {...register("age")}
-              className="form-multiselect mx-4 px-4 py-3 rounded-lg"
+              className="form-multiselect flex flex-1 m-4 px-4 py-3 rounded-lg"
             >
               <option>0 - 6</option>
               <option>7 - 13</option>
@@ -141,7 +141,7 @@ const Form: NextPage = () => {
             <select
               multiple={true}
               {...register("incomeRange")}
-              className="form-multiselect mx-4 px-4 py-3 rounded-lg"
+              className="form-multiselect flex flex-1 m-4 px-4 py-3 rounded-lg"
             >
               <option>0-50k/year</option>
               <option>50k-100k/year</option>
@@ -150,12 +150,12 @@ const Form: NextPage = () => {
             </select>
           </label>
 
-          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
+          <label className="px-4 mx-auto my-4 align-middle flex flex-1 flex-col">
             Does your brand target any of the following familial niches?
             <select
               multiple={true}
               {...register("famNiche")}
-              className="form-multiselect mx-4 flex flex-col flex-auto px-4 py-3 rounded-lg"
+              className="form-multiselect flex flex-1 m-4 px-4 py-3 rounded-lg"
             >
               <option>Singles</option>
               <option>Couples</option>
@@ -163,12 +163,12 @@ const Form: NextPage = () => {
             </select>
           </label>
 
-          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
+          <label className="px-4 mx-auto my-4 align-middle flex flex-1 flex-col">
             Does your brand target any of the following psychographic niches?
             <select
               multiple={true}
               {...register("psychoNiche")}
-              className="form-multiselect mx-4 flex flex-col flex-auto px-4 py-3 rounded-lg"
+              className="form-multiselect flex flex-1 m-4 px-4 py-3 rounded-lg"
             >
               <option>Adventure</option>
               <option>Alt/Hipster</option>
@@ -176,16 +176,16 @@ const Form: NextPage = () => {
             </select>
           </label>
 
-          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
+          <label className="px-4 mx-auto my-4 align-middle flex flex-1 flex-col">
             Are you open to partnering with an international brand?
-            <div>
+            <div className="flex flex-1 m-4 px-4 py-3 rounded-lg justify-center">
               <label>
                 Yes
                 <input
                   {...register("intlPartnership")}
                   type="radio"
                   value="true"
-                  className="mx-2 form-radio"
+                  className="mx-2 form-radio "
                 />
               </label>
               <label>
@@ -212,12 +212,12 @@ const Form: NextPage = () => {
             </p>
           )}
 
-          <label className="px-4 my-4 align-middle flex flex-1 flex-col">
+          <label className="px-4 mx-auto my-4 align-middle flex flex-1 flex-col">
             Which values best fit with your brand? (max: 5)
             <select
               multiple={true}
               {...register("brandValues")}
-              className="form-multiselect mx-4 flex flex-col flex-auto px-4 py-3 rounded-lg"
+              className="form-multiselect flex flex-1 m-4 px-4 py-3 rounded-lg"
             >
               <option>Affordability</option>
               <option>Charitable support</option>
