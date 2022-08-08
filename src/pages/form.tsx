@@ -8,6 +8,8 @@ import { useAtom, useSetAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
 const FormSchema = z.object({
+  brandName: z.string(),
+  location: z.string(),
   age: z.string().array().min(1),
   brandPartnerships: z.string().array().min(1),
   genderFocus: z.string().min(1),
@@ -20,8 +22,6 @@ const FormSchema = z.object({
     .array()
     .min(1)
     .max(5, { message: "Please select 5 or fewer" }),
-  brandName: z.string(),
-  location: z.string(),
 });
 
 type FormProps = z.infer<typeof FormSchema>;
@@ -54,11 +54,11 @@ const Form: NextPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
   } = useForm<FormProps>({
-    mode: "onSubmit",
-    reValidateMode: "onChange",
+    // mode: "onSubmit",
+    // reValidateMode: "onChange",
     resolver: zodResolver(FormSchema),
   });
   // const onError = (errors, e) => console.log(errors, e);
@@ -68,7 +68,8 @@ const Form: NextPage = () => {
   const [formData, setFormData] = useAtom(formAtom);
 
   // const onSubmit: SubmitHandler<FormProps> = (data, e) => console.log(data, e);
-  const onSubmit = (data: FormProps) => console.log(data);
+  const onSubmit = (data: FormProps) => (console.log(data), setFormData(data));
+  // const onSubmit = (data: FormProps) => setFormData(data);
 
   // console.log(darkMode);
 

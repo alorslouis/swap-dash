@@ -24,9 +24,11 @@ const Home: NextPage = () => {
 
       <main className="container mx-auto my-2 flex flex-col items-center justify-center p-4">
         Welcome{" "}
-        <p className="font-extrabold text-lg">
-          {profile.brandName}, {profile.location}
-        </p>
+        {profile?.brandName && (
+          <p className="font-extrabold text-lg">
+            {profile.brandName}, {profile.location}
+          </p>
+        )}
         <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
           <Link
             className="mt-3 text-sm underline text-violet-500 decoration-dotted underline-offset-2"

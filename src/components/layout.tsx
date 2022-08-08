@@ -24,19 +24,21 @@ export default function Layout({ children, pageTitle }: any) {
       <div className="container flex flex-col mx-auto ">
         <nav className="text-center py-4 flex flex-row items-center flex-wrap">
           <div className="flex flex-row flex-grow mx-6 items-center justify-center">
-            <div className="m-4 hover:rotate-90 transition ease-linear duration-300">
-              <Image
-                src="/image05.png"
-                alt="swapshop logo"
-                width={60}
-                height={60}
-                layout="fixed"
-              />
-            </div>
             <Link href="/">
-              <h1 className="text-bold font-black text-4xl text-center cursor-pointer">
-                ShopSwap
-              </h1>
+              <div className="flex items-center">
+                <div className="m-4 hover:rotate-90 transition ease-linear duration-300">
+                  <Image
+                    src="/image05.png"
+                    alt="swapshop logo"
+                    width={60}
+                    height={60}
+                    layout="fixed"
+                  />
+                </div>
+                <h1 className="text-bold font-black text-4xl text-center cursor-pointer">
+                  ShopSwap
+                </h1>
+              </div>
             </Link>
           </div>
           <div className="mx-auto px-4">
