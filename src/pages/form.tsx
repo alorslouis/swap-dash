@@ -59,7 +59,7 @@ const Form: NextPage = () => {
   } = useForm<FormProps>({
     // mode: "onSubmit",
     // reValidateMode: "onChange",
-    resolver: zodResolver(FormSchema),
+    // resolver: zodResolver(FormSchema),
   });
   // const onError = (errors, e) => console.log(errors, e);
 

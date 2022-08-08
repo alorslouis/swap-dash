@@ -1,8 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import LoginComponent from "./loginButton";
+import LoginButton from "./loginButton";
 import { useSession } from "next-auth/react";
+
+// function to compare supabase data with localstorage, return the freshest
 
 export default function Layout({ children, pageTitle }: any) {
   const { data: session, status } = useSession();
@@ -22,7 +24,7 @@ export default function Layout({ children, pageTitle }: any) {
         <meta property="og:type" content="website" />
       </Head>
       <div className="container flex flex-col mx-auto ">
-        <nav className="text-center py-4 flex flex-row items-center flex-wrap">
+        <nav className="text-center py-4 items-center flex-wrap">
           <div className="flex flex-row flex-grow mx-6 items-center justify-center">
             <Link href="/">
               <div className="flex items-center">
@@ -41,8 +43,9 @@ export default function Layout({ children, pageTitle }: any) {
               </div>
             </Link>
           </div>
-          <div className="mx-auto px-4">
-            <LoginComponent />
+
+          <div className="ml-auto flex-0 px-4">
+            <LoginButton />
           </div>
         </nav>
         {/* {status === "authenticated" ? (
