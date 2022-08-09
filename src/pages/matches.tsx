@@ -145,7 +145,7 @@ const Matches: NextPage = () => {
         ) : null}
 
         <h2>available matches</h2>
-        <ul ref={animationParent}>
+        <ul ref={animationParent} className="my-4 mx-2">
           {filtered.map((item, index) => {
             return (
               <li key={index}>
