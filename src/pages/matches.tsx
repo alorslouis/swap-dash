@@ -6,6 +6,7 @@ import { formAtom } from "./form";
 import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import React from "react";
+import { ClientOnly } from "../hooks/clientOnly";
 
 interface brandObjects extends QuestionResponses {
   matchScore: number;
@@ -86,16 +87,18 @@ const Matches: NextPage = () => {
       <div className="container mx-auto text-center">
         <div>
           <h2 className="text-xl font-medium">My Profile</h2>
-          <div>
-            <p>{profile.brandName}</p>
-            <p>{profile.location}</p>
-          </div>
+          <ClientOnly>
+            <div>
+              <p>{profile.brandName}</p>
+              <p>{profile.location}</p>
+            </div>
+          </ClientOnly>
         </div>
         <p className="text-4xl font-bold py-4">Matches</p>
         {/* <p className="text-4xl font-bold py-4">Matches</p> */}
 
         {picks?.length > 0 ? (
-          <div className="my-4">
+          <div className="my-4 mx-2">
             <p className="font-bold text-lg">My Picks</p>
 
             {/* clear picks array by setting as an empty array */}
@@ -109,7 +112,7 @@ const Matches: NextPage = () => {
                   key={index}
                   className="p-4 m-4 border rounded-md border-solid flex justify-center align-middle border-zinc-600 hover:text-red-600 hover:border-red-500 transition-all ease-linear"
                 >
-                  <p>
+                  <p className="justify-start">
                     {pick.brandName}, {pick.age}
                   </p>
                   <button

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useAtom, useSetAtom } from "jotai";
+import { atom, useAtom, useSetAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
 const FormSchema = z.object({
@@ -257,6 +257,7 @@ const Form: NextPage = () => {
           </button>
           {/* <input type="submit" /> */}
         </form>
+        {JSON.stringify(formData)}
       </div>
     </>
   );

@@ -7,12 +7,17 @@ import LoginComponent from "../components/loginButton";
 import { useSession } from "next-auth/react";
 import { useAtom } from "jotai";
 import { formAtom } from "./form";
+import posts from "./api/posts";
+import { ClientOnly } from "../hooks/clientOnly";
 
 const Home: NextPage = () => {
   const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
   // const { data: session, status } = useSession();
   const [profile] = useAtom(formAtom);
   // console.log(profile);
+
+  const aa = trpc.useQuery(["post.getAll"]);
+  console.log(aa);
 
   return (
     <>
@@ -23,12 +28,16 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="container mx-auto my-2 flex flex-col items-center justify-center p-4">
-        Welcome{" "}
-        {profile?.brandName && (
-          <p className="font-extrabold text-lg">
-            {profile.brandName}, {profile.location}
-          </p>
-        )}
+        <ClientOnly>
+          <div>
+            Welcome{" "}
+            {profile?.brandName && (
+              <p className="font-extrabold text-lg">
+                {profile.brandName}, {profile.location}
+              </p>
+            )}
+          </div>
+        </ClientOnly>
         <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
           <Link
             className="mt-3 text-sm underline text-violet-500 decoration-dotted underline-offset-2"
