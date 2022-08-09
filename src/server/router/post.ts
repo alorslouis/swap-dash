@@ -17,6 +17,6 @@ export const postRouter = createRouter()
   .query("getAll", {
     async resolve({ ctx }) {
       //   return await ctx.prisma.account.findMany();
-      return await ctx.prisma.example.findMany();
+      return await ctx.prisma.brand.findMany();
     },
   });
