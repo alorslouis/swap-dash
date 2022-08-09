@@ -18,6 +18,12 @@ model Brand {
   id       String  @id @default(cuid())
   name     String?
   location String?
+  users    User[]
+//   profile  BrandProfile @relation( references: [id])
+}
+
+model BrandProfile {
+  id String @id @default(cuid())
 }
 
 model Post {
@@ -65,11 +71,12 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  Post          Post[]
+  post          Post[]
+  brands        Brand[]
 }
 
 model VerificationToken {
-  identifier String
+  identifier String @unique
   token      String   @unique
   expires    DateTime
 

@@ -1,7 +1,7 @@
-import { createRouter } from "./context";
 import { z } from "zod";
+import { createRouter } from "./context";
 
-export const exampleRouter = createRouter()
+export const postRouter = createRouter()
   .query("hello", {
     input: z
       .object({
@@ -16,6 +16,7 @@ export const exampleRouter = createRouter()
   })
   .query("getAll", {
     async resolve({ ctx }) {
-      return await ctx.prisma.account.findMany();
+      //   return await ctx.prisma.account.findMany();
+      return await ctx.prisma.example.findMany();
     },
   });
