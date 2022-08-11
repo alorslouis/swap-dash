@@ -4,7 +4,7 @@ This is a test project for a technical challenge - built with the following:
 
 | What | Why |
 |:--|:--|
-| Next.js | React+ |
+| Next.js | React+ – critical mass of talent + support |
 | TypeScript | JS, but robust & consistent |
 | Tailwind | 💙 |
 | Next-Auth | clean & OS auth for Next; Clerk? |
@@ -23,6 +23,8 @@ This is a test project for a technical challenge - built with the following:
 - [x] Supabase config
 - [x] Prisma config
 - [ ] tRPC + Jotai plumbing
+- [ ] form validate troubleshooting
+- [ ] form funnel
 
 ### Create T3 App
 

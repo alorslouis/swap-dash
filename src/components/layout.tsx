@@ -15,7 +15,7 @@ export default function Layout({ children, pageTitle }: any) {
         <title>{pageTitle ?? "ShopSwap"}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta property="og:title" content="ShopSwap" key="ogtitle" />
+        <meta property="og:title" content="SwapShop" key="ogtitle" />
         <meta
           property="og:description"
           content="custom couture, hecho en barcelona"

@@ -8,7 +8,7 @@ export default function LoginButton() {
         Signed in as {session?.user?.email} <br />
         <button
           onClick={() => signOut()}
-          className="p-4 my-4 text-white bg-slate-700 rounded-md"
+          className="p-4 my-4 text-white bg-slate-700 rounded-md shadow-lg hover:bg-slate-800"
         >
           Sign out
         </button>
@@ -21,7 +21,7 @@ export default function LoginButton() {
         {/* Not signed in <br /> */}
         <button
           onClick={() => signIn()}
-          className="p-4 my-4 text-white bg-slate-700 rounded-md"
+          className="p-4 my-4 text-white bg-slate-700 rounded-md shadow-lg"
         >
           Sign in
         </button>
